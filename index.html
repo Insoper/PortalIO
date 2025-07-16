@@ -206,15 +206,16 @@
 
     <script>
         // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/PortalIO/sw.js')
-                .then(registration => {
-                    console.log('SW registered');
-                })
-                .catch(err => {
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-        }
+       // Corrected service worker registration
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/PortalIO/sw.js')
+    .then(registration => {
+      console.log('SW registered');
+    })
+    .catch(err => {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+}
         
         // Install prompt handling
         let deferredPrompt;
