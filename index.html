@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2c3e50">
+    <title>Portal Insoper</title>
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Portal Insoper">
+    <meta name="description" content="Portal Aplikasi Pendukung Pembelajaran Insoper">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" href="icons/favicon.ico">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/android-chrome-512x512.png">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .portal-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            padding: 40px;
+            width: 90%;
+            max-width: 700px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 2.2rem;
+        }
+        
+        .welcome-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #495057;
+            margin-bottom: 30px;
+        }
+        
+        .link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .external-link {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 16px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .external-link:hover {
+            background-color: #f8f9fa;
+            border-color: #adb5bd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .external-link i {
+            margin-right: 12px;
+            font-size: 1.4rem;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .quiz-link i { color: #e74c3c; }
+        .tms-link i { color: #3498db; }
+        .osc-link i { color: #2ecc71; }
+        .bank-link i { color: #9b59b6; }
+        
+        .note {
+            margin-top: 30px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        /* Install button style */
+        .install-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: none; /* Hidden by default */
+        }
+        
+        .install-btn:hover {
+            background-color: #1a252f;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="portal-container">
+        <div class="header">
+            <h1><i class="fas fa-chalkboard-teacher"></i> SELAMAT DATANG BAPAK-BAPAK INSOPER</h1>
+            <div class="welcome-text">
+                <p>Portal ini dibuat khusus untuk memudahkan rekan-rekan mengakses berbagai aplikasi pendukung pembelajaran. Semua tools yang dibutuhkan sudah tersedia dalam satu tempat untuk kenyamanan rekan-rekan saat pelatihan.</p>
+                <p>Silakan pilih aplikasi dari daftar berikut. Setiap link akan terbuka di jendela baru agar rekan-rekan mudah kembali ke portal ini.</p>
+            </div>
+        </div>
+        
+        <div class="link-list">
+            <a href="https://insoper.github.io/Quizzes-OK/" class="external-link" target="_blank">
+                <i class="fas fa-question-circle"></i> Aplikasi Kuis Interaktif (Quizzes)
+            </a>
+            <a href="https://insoper.github.io/TMS-Pro/" class="external-link" target="_blank">
+                <i class="fas fa-clipboard-check"></i> Time Motion Study (TMS Pro)
+            </a>
+            <a href="https://insoper.github.io/OSC/" class="external-link" target="_blank">
+                <i class="fas fa-book"></i> Operator Skill Check (OSC) - On Going
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1YjWKOEWFVt9W8QkIO7nmQZWaQoZD1RYqLXEEyY6e5HU/edit?usp=sharing" class="external-link" target="_blank">
+                <i class="fas fa-chart-bar"></i> Bank Soal Quizzes
+            </a>
+        </div>
+        
+        <p class="note">Portal Instruktur v1.0 | Untuk bantuan teknis hubungi Mushowwir Zam</p>
+    </div>
+    
+    <button id="installBtn" class="install-btn" title="Install Portal Insoper">
+        <i class="fas fa-download"></i> Install App
+    </button>
+
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+        
+        // Install prompt handling
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            // Show the install button
+            installBtn.style.display = 'block';
+        });
+        
+        installBtn.addEventListener('click', () => {
+            if (deferredPrompt) {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    // Clear the deferredPrompt variable
+                    deferredPrompt = null;
+                    // Hide the install button
+                    installBtn.style.display = 'none';
+                });
+            }
+        });
+        
+        window.addEventListener('appinstalled', () => {
+            // Hide the install button
+            installBtn.style.display = 'none';
+            // Clear the deferredPrompt variable
+            deferredPrompt = null;
+            console.log('PWA was installed');
+        });
+    </script>
+</body>
+</html>
