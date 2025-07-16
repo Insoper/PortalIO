@@ -197,21 +197,42 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* Tambahkan media query untuk layar kecil */
+@media (max-width: 767px) {
+    .header {
+        padding-top: 40px; /* Memberi ruang untuk tombol refresh */
+    }
+    
+    .refresh-btn {
+        top: 10px;
+        right: 10px;
+        background-color: rgba(255,255,255,0.8);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+        font-size: 1.3rem;
+        padding-right: 30px; /* Mencegah text bertabrakan dengan tombol */
+    }
+}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="portal-container">
         <div class="header">
-            <h1><i class="fas fa-chalkboard-teacher"></i> SELAMAT DATANG BAPAK-BAPAK INSOPER</h1>
-            <button class="refresh-btn" title="Refresh Halaman" id="refreshBtn">
-                <i class="fas fa-sync-alt"></i>
-            </button>
-            <div class="welcome-text">
-                <p>Portal ini dibuat khusus untuk memudahkan rekan-rekan mengakses berbagai aplikasi pendukung pembelajaran. Semua tools yang dibutuhkan sudah tersedia dalam satu tempat untuk kenyamanan rekan-rekan saat pelatihan.</p>
-                <p>Silakan pilih aplikasi dari daftar berikut. Setiap link akan terbuka di jendela baru agar rekan-rekan mudah kembali ke portal ini.</p>
-            </div>
-        </div>
+    <div style="position: relative;">
+        <h1><i class="fas fa-chalkboard-teacher"></i> SELAMAT DATANG BAPAK-BAPAK INSOPER</h1>
+        <button class="refresh-btn" title="Refresh Halaman" id="refreshBtn">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+    </div>
+    <div class="welcome-text">
+        <p>Portal ini dibuat khusus untuk memudahkan rekan-rekan mengakses berbagai aplikasi pendukung pembelajaran. Semua tools yang dibutuhkan sudah tersedia dalam satu tempat untuk kenyamanan rekan-rekan saat pelatihan.</p>
+        <p>Silakan pilih aplikasi dari daftar berikut. Setiap link akan terbuka di jendela baru agar rekan-rekan mudah kembali ke portal ini.</p>
+    </div>
+</div>
         
         <div class="link-list">
             <a href="https://insoper.github.io/Quizzes-OK/" class="external-link quiz-link" target="_blank">
