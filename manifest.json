@@ -1,6 +1,6 @@
 {
   "name": "Portal Insoper",
-  "short_name": "Insoper",
+  "short_name": "Portal Insoper",
   "start_url": "/PortalIO/",  // PERHATIKAN SLASH DI AWAL DAN AKHIR
   "scope": "/PortalIO/",      // TAMBAHKAN INI
   "display": "standalone",
