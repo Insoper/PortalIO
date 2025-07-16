@@ -21,77 +21,103 @@
     <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
     
     <style>
-         /* Perubahan utama untuk mengisi layar penuh */
+        /* Reset and base styles */
         html, body {
-            overflow: auto; /* Diubah dari hidden ke auto */
             height: 100%;
             margin: 0;
             padding: 0;
-            touch-action: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
             display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Diubah dari center ke flex-start */
-            color: #333;
-            width: 100%;
-            min-height: 100vh; /* Tambahkan min-height */
-            padding: 10px; /* Padding kecil di sekeliling */
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 10px;
             box-sizing: border-box;
         }
         
+        /* Main container */
         .portal-container {
             background-color: white;
             border-radius: 12px;
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
             padding: 20px;
-            width: 100%; /* Diubah dari 95% ke 100% */
+            width: 100%;
             max-width: 700px;
-            margin: 10px 0; /* Margin atas bawah */
+            margin: 0 auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
-
-        /* Perubahan untuk header lebih compact */
+        
+        /* Header section */
         .header {
             text-align: center;
             margin-bottom: 15px;
             border-bottom: 2px solid #e9ecef;
             padding-bottom: 10px;
+            position: relative;
         }
-
+        
+        .header-content {
+            position: relative;
+            padding-right: 40px;
+        }
+        
         h1 {
-            font-size: 1.4rem; /* Ukuran lebih kecil */
+            color: #2c3e50;
+            font-size: 1.4rem;
             margin: 5px 0;
-            padding: 0 30px; /* Ruang untuk tombol */
+            line-height: 1.3;
+            padding: 0 30px;
         }
-
-        /* Perbaikan spacing untuk mobile */
-        @media (max-width: 767px) {
-            body {
-                padding: 5px;
-                align-items: stretch; /* Kontainer mengisi lebar */
-            }
-            
-            .portal-container {
-                padding: 15px;
-                border-radius: 8px;
-            }
-            
-            h1 {
-                font-size: 1.2rem;
-                padding: 0 25px;
-            }
-            
-            .welcome-text {
-                font-size: 0.85rem;
-            }
-            
-            .external-link {
-                padding: 10px 12px;
-                font-size: 0.85rem;
-            }
+        
+        .welcome-text {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #495057;
+            margin-bottom: 15px;
+        }
+        
+        /* Links list */
+        .link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+        
+        .external-link {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+        }
+        
+        .external-link:hover {
+            background-color: #f8f9fa;
+            border-color: #adb5bd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .external-link i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
         
         .quiz-link i { color: #e74c3c; }
         .tms-link i { color: #3498db; }
@@ -99,15 +125,16 @@
         .bank-link i { color: #9b59b6; }
         .trainee-link i { color: #f39c12; }
         
+        /* Footer note */
         .note {
-            margin-top: 20px;
+            margin-top: 15px;
             color: #6c757d;
             font-size: 0.8rem;
             text-align: center;
             font-style: italic;
         }
         
-        /* Install button style */
+        /* Install button */
         .install-btn {
             position: fixed;
             bottom: 15px;
@@ -128,7 +155,7 @@
             background-color: #1a252f;
         }
 
-        /* Tombol Refresh */
+        /* Refresh button */
         .refresh-btn {
             position: absolute;
             top: 0;
@@ -154,14 +181,19 @@
             transform: rotate(360deg);
         }
 
-        /* Media queries for responsiveness */
+        /* Responsive adjustments */
         @media (min-width: 768px) {
+            body {
+                padding: 20px;
+                justify-content: center;
+            }
+            
             .portal-container {
                 padding: 30px;
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .welcome-text {
@@ -172,37 +204,44 @@
                 padding: 15px 20px;
                 font-size: 1rem;
             }
-            
-            .note {
-                font-size: 0.9rem;
-            }
         }
         
-        /* Mobile specific adjustments */
         @media (max-width: 767px) {
-            .header {
-                padding-top: 15px;
-                padding-right: 15px;
+            body {
+                padding: 8px;
             }
             
-            .header-content {
-                padding-right: 35px;
+            .portal-container {
+                padding: 15px;
+                border-radius: 8px;
+            }
+            
+            .header {
+                padding-top: 10px;
             }
             
             h1 {
-                font-size: 1.3rem;
-                padding-right: 10px;
+                font-size: 1.2rem;
+                padding: 0 25px;
             }
             
             .refresh-btn {
                 width: 28px;
                 height: 28px;
                 font-size: 0.9rem;
-                top: -5px;
+                top: -3px;
+            }
+            
+            .welcome-text {
+                font-size: 0.85rem;
+            }
+            
+            .external-link {
+                padding: 10px 12px;
+                font-size: 0.85rem;
             }
         }
         
-        /* Very small screens */
         @media (max-width: 400px) {
             h1 {
                 font-size: 1.1rem;
@@ -212,7 +251,11 @@
                 width: 25px;
                 height: 25px;
                 font-size: 0.8rem;
-                top: -3px;
+            }
+            
+            .portal-container {
+                border-radius: 0;
+                box-shadow: none;
             }
         }
     </style>
@@ -264,6 +307,7 @@
             navigator.serviceWorker.register('/PortalIO/sw.js')
                 .then(registration => {
                     console.log('SW registered');
+                registration.update();
                 })
                 .catch(err => {
                     console.log('ServiceWorker registration failed: ', err);
@@ -278,19 +322,25 @@
             e.preventDefault();
             deferredPrompt = e;
             installBtn.style.display = 'block';
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                installBtn.style.display = 'none';
+            }, 10000);
         });
         
         installBtn.addEventListener('click', () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
+                    installBtn.style.display = 'none';
                     if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
+                        console.log('User accepted install');
+                        // Track installation if needed
                     } else {
-                        console.log('User dismissed the install prompt');
+                        console.log('User dismissed install');
                     }
                     deferredPrompt = null;
-                    installBtn.style.display = 'none';
                 });
             }
         });
@@ -298,20 +348,16 @@
         window.addEventListener('appinstalled', () => {
             installBtn.style.display = 'none';
             deferredPrompt = null;
-            console.log('PWA was installed');
+            console.log('PWA installed');
         });
 
-        // Prevent default touch behavior
-        document.addEventListener('touchmove', function(e) {
-            if (!e.target.classList.contains('portal-container')) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        // Tombol Refresh
+        // Refresh button
         document.getElementById('refreshBtn').addEventListener('click', function() {
-            location.reload();
+            window.location.reload(true);
         });
+
+        // Touch optimization
+        document.addEventListener('touchstart', function() {}, {passive: true});
     </script>
 </body>
 </html>
