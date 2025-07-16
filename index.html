@@ -117,7 +117,6 @@
         .osc-link i { color: #2ecc71; }
         .bank-link i { color: #9b59b6; }
         .trainee-link i { color: #f39c12; }
-        .image-link i { color: #1abc9c; }
         
         .note {
             margin-top: 20px;
@@ -200,9 +199,6 @@
             <a href="https://insoper.github.io/TraineesData/" class="external-link trainee-link" target="_blank">
                 <i class="fas fa-users"></i> Trainees Data
             </a>
-            <a href="https://insoper.github.io/my-images/" class="external-link image-link" target="_blank">
-                <i class="fas fa-image"></i> Generate Link Image
-            </a>
         </div>
         
         <p class="note">Portal Instruktur v1.0 | Untuk bantuan teknis hubungi Mushowwir Zam</p>
@@ -214,16 +210,15 @@
 
     <script>
         // Register Service Worker
-       // Corrected service worker registration
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/PortalIO/sw.js')
-    .then(registration => {
-      console.log('SW registered');
-    })
-    .catch(err => {
-      console.log('ServiceWorker registration failed: ', err);
-    });
-}
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/PortalIO/sw.js')
+                .then(registration => {
+                    console.log('SW registered');
+                })
+                .catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+        }
         
         // Install prompt handling
         let deferredPrompt;
