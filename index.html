@@ -13,7 +13,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     
     <!-- Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/PortalIO/manifest.json">
     
     <!-- Icons -->
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -190,12 +190,11 @@
 
     <script>
         // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(registration => {
-                        console.log('ServiceWorker registration successful');
-                    })
+     if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/PortalIO/sw.js')  // TAMBAHKAN PATH
+    .then(registration => {
+      console.log('SW registered');
+    });
                     .catch(err => {
                         console.log('ServiceWorker registration failed: ', err);
                     });
