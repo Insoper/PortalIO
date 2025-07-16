@@ -54,7 +54,7 @@
             max-height: 95vh;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
-            position: relative; /* Untuk posisi tombol refresh */
+            position: relative;
         }
         
         .header {
@@ -62,7 +62,11 @@
             margin-bottom: 20px;
             border-bottom: 2px solid #e9ecef;
             padding-bottom: 15px;
-            position: relative; /* Untuk posisi tombol refresh */
+        }
+        
+        .header-content {
+            position: relative;
+            padding-right: 40px;
         }
         
         h1 {
@@ -70,6 +74,7 @@
             margin-bottom: 10px;
             font-size: 1.5rem;
             margin-top: 0;
+            line-height: 1.3;
         }
         
         .welcome-text {
@@ -152,13 +157,13 @@
         /* Tombol Refresh */
         .refresh-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: transparent;
+            top: 0;
+            right: 0;
+            background-color: #f8f9fa;
             color: #2c3e50;
-            border: none;
+            border: 1px solid #dee2e6;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1rem;
             padding: 5px;
             border-radius: 50%;
             width: 30px;
@@ -167,10 +172,11 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
+            z-index: 1;
         }
         
         .refresh-btn:hover {
-            background-color: #f1f1f1;
+            background-color: #e9ecef;
             transform: rotate(360deg);
         }
 
@@ -197,42 +203,61 @@
                 font-size: 0.9rem;
             }
         }
-
-        /* Tambahkan media query untuk layar kecil */
-@media (max-width: 767px) {
-    .header {
-        padding-top: 40px; /* Memberi ruang untuk tombol refresh */
-    }
-    
-    .refresh-btn {
-        top: 10px;
-        right: 10px;
-        background-color: rgba(255,255,255,0.8);
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    
-    h1 {
-        font-size: 1.3rem;
-        padding-right: 30px; /* Mencegah text bertabrakan dengan tombol */
-    }
-}
+        
+        /* Mobile specific adjustments */
+        @media (max-width: 767px) {
+            .header {
+                padding-top: 15px;
+                padding-right: 15px;
+            }
+            
+            .header-content {
+                padding-right: 35px;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+                padding-right: 10px;
+            }
+            
+            .refresh-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+                top: -5px;
+            }
+        }
+        
+        /* Very small screens */
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.1rem;
+            }
+            
+            .refresh-btn {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+                top: -3px;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="portal-container">
         <div class="header">
-    <div style="position: relative;">
-        <h1><i class="fas fa-chalkboard-teacher"></i> SELAMAT DATANG BAPAK-BAPAK INSOPER</h1>
-        <button class="refresh-btn" title="Refresh Halaman" id="refreshBtn">
-            <i class="fas fa-sync-alt"></i>
-        </button>
-    </div>
-    <div class="welcome-text">
-        <p>Portal ini dibuat khusus untuk memudahkan rekan-rekan mengakses berbagai aplikasi pendukung pembelajaran. Semua tools yang dibutuhkan sudah tersedia dalam satu tempat untuk kenyamanan rekan-rekan saat pelatihan.</p>
-        <p>Silakan pilih aplikasi dari daftar berikut. Setiap link akan terbuka di jendela baru agar rekan-rekan mudah kembali ke portal ini.</p>
-    </div>
-</div>
+            <div class="header-content">
+                <h1><i class="fas fa-chalkboard-teacher"></i> SELAMAT DATANG BAPAK-BAPAK INSOPER</h1>
+                <button class="refresh-btn" title="Refresh Halaman" id="refreshBtn">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div class="welcome-text">
+                <p>Portal ini dibuat khusus untuk memudahkan rekan-rekan mengakses berbagai aplikasi pendukung pembelajaran. Semua tools yang dibutuhkan sudah tersedia dalam satu tempat untuk kenyamanan rekan-rekan saat pelatihan.</p>
+                <p>Silakan pilih aplikasi dari daftar berikut. Setiap link akan terbuka di jendela baru agar rekan-rekan mudah kembali ke portal ini.</p>
+            </div>
+        </div>
         
         <div class="link-list">
             <a href="https://insoper.github.io/Quizzes-OK/" class="external-link quiz-link" target="_blank">
@@ -276,37 +301,28 @@
         const installBtn = document.getElementById('installBtn');
         
         window.addEventListener('beforeinstallprompt', (e) => {
-            // Prevent the mini-infobar from appearing on mobile
             e.preventDefault();
-            // Stash the event so it can be triggered later
             deferredPrompt = e;
-            // Show the install button
             installBtn.style.display = 'block';
         });
         
         installBtn.addEventListener('click', () => {
             if (deferredPrompt) {
-                // Show the install prompt
                 deferredPrompt.prompt();
-                // Wait for the user to respond to the prompt
                 deferredPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'accepted') {
                         console.log('User accepted the install prompt');
                     } else {
                         console.log('User dismissed the install prompt');
                     }
-                    // Clear the deferredPrompt variable
                     deferredPrompt = null;
-                    // Hide the install button
                     installBtn.style.display = 'none';
                 });
             }
         });
         
         window.addEventListener('appinstalled', () => {
-            // Hide the install button
             installBtn.style.display = 'none';
-            // Clear the deferredPrompt variable
             deferredPrompt = null;
             console.log('PWA was installed');
         });
