@@ -40,7 +40,7 @@ html, body {
   background-color: #f8f9fa;
   color: #333;
   -webkit-text-size-adjust: 100%;
-  overflow: auto;
+  overflow: hidden; /* ⛔ scroll di-nonaktifkan */
 }
 
 body {
@@ -52,12 +52,14 @@ body {
 .portal-container {
   background-color: #fff;
   width: 100%;
-  min-height: 100vh;
-  padding: 20px 15px 40px;
+  height: 100vh; /* 💡 selalu pas satu layar */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  padding: 20px 15px 30px;
+  overflow: hidden; /* ⛔ tidak bisa scroll internal */
 }
+
 
 /* ====== Header Section ====== */
 .header {
@@ -95,13 +97,11 @@ h1 {
 
 /* ====== Link Button List ====== */
 .link-list {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  flex-grow: 1;
-  overflow-y: auto;
-  padding: 0;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden; /* ⛔ tidak bisa scroll juga */
 }
 
 .external-link {
