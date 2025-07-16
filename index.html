@@ -22,33 +22,34 @@
     
     <style>
         /* Reset and base styles */
-        html, body {
-            height: 100%;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
             color: #333;
+            overflow: auto;
+            -webkit-text-size-adjust: 100%;
         }
         
         body {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            padding: 10px;
-            box-sizing: border-box;
         }
         
-        /* Main container */
+        /* Main container - fills screen completely */
         .portal-container {
             background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            padding: 20px;
             width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
-            flex-grow: 1;
+            height: 100%;
+            min-height: 100vh;
+            padding: 15px;
             display: flex;
             flex-direction: column;
         }
@@ -57,9 +58,10 @@
         .header {
             text-align: center;
             margin-bottom: 15px;
-            border-bottom: 2px solid #e9ecef;
             padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
             position: relative;
+            flex-shrink: 0;
         }
         
         .header-content {
@@ -82,12 +84,15 @@
             margin-bottom: 15px;
         }
         
-        /* Links list */
+        /* Links list - takes remaining space */
         .link-list {
             display: flex;
             flex-direction: column;
             gap: 10px;
             flex-grow: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 5px 0;
         }
         
         .external-link {
@@ -132,6 +137,7 @@
             font-size: 0.8rem;
             text-align: center;
             font-style: italic;
+            flex-shrink: 0;
         }
         
         /* Install button */
@@ -183,13 +189,14 @@
 
         /* Responsive adjustments */
         @media (min-width: 768px) {
-            body {
-                padding: 20px;
-                justify-content: center;
-            }
-            
             .portal-container {
-                padding: 30px;
+                padding: 20px;
+                max-width: 700px;
+                margin: 0 auto;
+                height: auto;
+                min-height: 100vh;
+                border-radius: 12px;
+                box-shadow: 0 6px 12px rgba(0,0,0,0.1);
             }
             
             h1 {
@@ -207,17 +214,8 @@
         }
         
         @media (max-width: 767px) {
-            body {
-                padding: 8px;
-            }
-            
             .portal-container {
-                padding: 15px;
-                border-radius: 8px;
-            }
-            
-            .header {
-                padding-top: 10px;
+                padding: 12px;
             }
             
             h1 {
@@ -254,8 +252,7 @@
             }
             
             .portal-container {
-                border-radius: 0;
-                box-shadow: none;
+                padding: 8px;
             }
         }
     </style>
@@ -304,14 +301,16 @@
     <script>
         // Register Service Worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/PortalIO/sw.js')
-                .then(registration => {
-                    console.log('SW registered');
-                registration.update();
-                })
-                .catch(err => {
-                    console.log('ServiceWorker registration failed: ', err);
-                });
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/PortalIO/sw.js')
+                    .then(registration => {
+                        console.log('SW registered');
+                        registration.update();
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
         }
         
         // Install prompt handling
@@ -323,9 +322,10 @@
             deferredPrompt = e;
             installBtn.style.display = 'block';
             
-            // Auto-hide after 10 seconds
             setTimeout(() => {
-                installBtn.style.display = 'none';
+                if (installBtn.style.display !== 'none') {
+                    installBtn.style.display = 'none';
+                }
             }, 10000);
         });
         
@@ -334,12 +334,6 @@
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
                     installBtn.style.display = 'none';
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted install');
-                        // Track installation if needed
-                    } else {
-                        console.log('User dismissed install');
-                    }
                     deferredPrompt = null;
                 });
             }
@@ -353,11 +347,16 @@
 
         // Refresh button
         document.getElementById('refreshBtn').addEventListener('click', function() {
-            window.location.reload(true);
+            window.location.reload();
         });
 
         // Touch optimization
         document.addEventListener('touchstart', function() {}, {passive: true});
+        
+        // Prevent zooming on mobile
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
     </script>
 </body>
 </html>
