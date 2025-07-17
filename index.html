@@ -242,6 +242,37 @@ h1 {
   }
 }
 
+.link-list {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto; /* ✅ biarkan scroll jika melebihi tinggi */
+  max-height: 100%; /* ✅ batasi tinggi */
+  padding-right: 5px; /* beri ruang agar tidak terpotong scrollbar */
+}
+
+.external-link {
+  font-size: 0.95rem; /* ✅ perkecil sedikit */
+  padding: 12px 14px; /* ✅ kurangi padding agar muat */
+}
+
+/* Versi layar kecil < 400px */
+@media (max-width: 400px) {
+  .external-link {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  .welcome-text {
+    font-size: 0.85rem;
+  }
+
+  .note {
+    font-size: 0.75rem;
+  }
+}
+
   </style>
 </head>
 <body>
