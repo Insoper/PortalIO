@@ -13,13 +13,13 @@
   <meta name="description" content="Portal Aplikasi Pendukung Pembelajaran Insoper" />
   <meta name="mobile-web-app-capable" content="yes" />
 
-  <!-- Manifest -->
-  <link rel="manifest" href="/PortalIO/manifest.json" />
+  <!-- Manifest dengan versioning -->
+  <link rel="manifest" href="/PortalIO/manifest.json?v=1.2" />
 
-  <!-- Icons -->
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png" />
+  <!-- Icons dengan versioning -->
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1.2" />
+  <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png?v=1.2" />
+  <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png?v=1.2" />
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -300,22 +300,38 @@
       </a>
     </div>
 
-    <p class="note">Portal Instruktur v1.1 | Untuk bantuan teknis hubungi Mushowwir Zam</p>
+    <p class="note">Portal Instruktur v1.2 | Untuk bantuan teknis hubungi Mushowwir Zam</p>
   </div>
 
   <button id="installBtn" class="install-btn" title="Install Portal Insoper">
     <i class="fas fa-download"></i> Install App
   </button>
 
-  <!-- Script -->
+  <!-- Script dengan update handling -->
   <script>
-    // Register Service Worker
+    // Register Service Worker dengan update handling
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/PortalIO/sw.js')
+        navigator.serviceWorker.register('/PortalIO/sw.js?v=1.2')
           .then(reg => {
-            console.log('SW registered');
+            console.log('SW registered:', reg);
+            
+            // Periksa update setiap kali halaman dimuat
             reg.update();
+            
+            // Deteksi ketika ada service worker baru
+            reg.addEventListener('updatefound', () => {
+              const newWorker = reg.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  console.log('New update available!');
+                  // Tampilkan notifikasi atau paksa refresh
+                  if(confirm('Versi baru tersedia. Muat ulang sekarang?')) {
+                    window.location.reload();
+                  }
+                }
+              });
+            });
           })
           .catch(err => console.log('ServiceWorker registration failed:', err));
       });
@@ -355,7 +371,11 @@
 
     // Refresh button
     document.getElementById('refreshBtn').addEventListener('click', () => {
-      window.location.reload();
+      // Bersihkan cache sebelum refresh
+      if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({action: 'clearCache'});
+      }
+      window.location.reload(true); // Hard refresh
     });
 
     // Touch optimization
@@ -364,6 +384,14 @@
     // Prevent mobile zoom
     document.addEventListener('gesturestart', (e) => {
       e.preventDefault();
+    });
+
+    // Deteksi perubahan service worker
+    let refreshing;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
     });
   </script>
 </body>
