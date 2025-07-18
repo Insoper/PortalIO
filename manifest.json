@@ -1,19 +1,20 @@
 {
   "name": "Portal Insoper",
   "short_name": "Portal Insoper",
-  "start_url": "/PortalIO/",  // PERHATIKAN SLASH DI AWAL DAN AKHIR
-  "scope": "/PortalIO/",      // TAMBAHKAN INI
+  "start_url": "/PortalIO/index.html",
+  "scope": "/PortalIO/",
   "display": "standalone",
   "background_color": "#2c3e50",
   "theme_color": "#2c3e50",
+  "description": "Portal Aplikasi Pendukung Pembelajaran Insoper",
   "icons": [
     {
-      "src": "/PortalIO/android-chrome-192x192.png",  // TAMBAHKAN PATH
+      "src": "/PortalIO/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/PortalIO/android-chrome-512x512.png",  // TAMBAHKAN PATH
+      "src": "/PortalIO/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
