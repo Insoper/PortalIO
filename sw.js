@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portal-insoper-v2';
+const CACHE_NAME = 'portal-insoper-v3';
 const BASE_PATH = '/PortalIO/';
 const urlsToCache = [
   BASE_PATH,
