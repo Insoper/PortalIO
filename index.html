@@ -97,9 +97,9 @@
     /* ====== Link Button List ====== */
     .link-list {
       flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
       overflow-y: auto;
       max-height: 100%;
       padding-right: 5px;
@@ -108,16 +108,17 @@
     .external-link {
       display: flex;
       align-items: center;
-      padding: 20px;
+      padding: 16px;
       background-color: #fff;
       border: 1px solid #dee2e6;
       border-radius: 10px;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 500;
       color: #2c3e50;
       text-decoration: none;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
       transition: all 0.3s ease;
+      height: 100%;
     }
 
     .external-link:hover {
@@ -203,11 +204,13 @@
     /* ====== Responsive Adjustments ====== */
     @media (min-width: 768px) {
       .portal-container {
-        padding: 30px 20px 40px;
-        max-width: 700px;
+        padding: 25px 20px 30px;
+        max-width: 800px;
         margin: 0 auto;
         border-radius: 12px;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        height: auto;
+        min-height: 100vh;
       }
 
       h1 {
@@ -216,10 +219,31 @@
 
       .welcome-text {
         font-size: 1rem;
+        margin-bottom: 20px;
+      }
+
+      .link-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
       }
 
       .external-link {
-        font-size: 1.15rem;
+        font-size: 1rem;
+        padding: 18px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .portal-container {
+        max-width: 900px;
+      }
+      
+      .link-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .external-link {
+        font-size: 1.05rem;
       }
     }
 
@@ -235,28 +259,38 @@
       }
 
       .portal-container {
-        padding: 15px 10px 30px;
+        padding: 15px 10px 25px;
       }
 
       .external-link {
-        font-size: 1rem;
-        padding: 16px;
+        font-size: 0.9rem;
+        padding: 14px;
+      }
+      
+      .welcome-text {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+      }
+      
+      .note {
+        font-size: 0.75rem;
+        margin-top: 20px;
       }
     }
 
-    /* Versi layar kecil < 400px */
-    @media (max-width: 400px) {
+    /* Penyesuaian tinggi untuk memastikan semua item terlihat tanpa scroll */
+    @media (max-height: 700px) and (min-width: 768px) {
+      .portal-container {
+        padding: 20px 15px 25px;
+      }
+      
       .external-link {
-        font-size: 0.9rem;
-        padding: 10px 12px;
+        padding: 14px;
+        font-size: 0.95rem;
       }
-
+      
       .welcome-text {
-        font-size: 0.85rem;
-      }
-
-      .note {
-        font-size: 0.75rem;
+        margin-bottom: 15px;
       }
     }
   </style>
@@ -283,7 +317,7 @@
       <a href="https://insoper.github.io/TMS-Pro/" class="external-link tms-link" target="_blank">
         <i class="fas fa-clipboard-check"></i> Time Motion Study (Excavator)
       </a>
-      <a href="   https://insoper.github.io/TMS-Pro/indexWA.html" class="external-link tms-link" target="_blank">
+      <a href="https://insoper.github.io/TMS-Pro/indexWA.html" class="external-link tms-link" target="_blank">
         <i class="fas fa-clipboard-check"></i> Time Motion Study (Wheel Loader)
       </a>
       <a href="https://insoper.github.io/OSC/" class="external-link osc-link" target="_blank">
@@ -402,5 +436,3 @@
   </script>
 </body>
 </html>
-
-
